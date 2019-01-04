@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>User Wall</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        .message{
+            width: 400px;
+            height: 300px;
+            margin-left: 30px;
+            border: 1px dotted grey;
+            text-align: left;
+            overflow-y: scroll;
+        }
+        .container{
+            background-color: darkgrey;
+        }
+        input[type=text]{
+            width: 280px;
+            border-radius: 5px;
+        }
+        input[type=submit]{
+            width: 80px;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+        }
+        .message, .send{
+            background-color: lightpink;
+            width: 300px;
+            display:  inline-block;
+            vertical-align: top;
+            margin: 40px;
+        }
+        div {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        div .message{
+            margin-left: 200px;
+        }
+    </style>
+    </head>
+  <body>
+    <div class="container">
+        <div class="welcome">
+            <h4>Welcome, {{session['user']}} !</h4>
+                <form action="/logout" method='post'>
+                    <input type="submit" value="Logout">
+                </form>
+        </div>
+
+        <div class="message">
+            <h4>{{length}} message(s) for you: </h4>
+            <ul>{% for i in range(length) %}
+                    {% if content[i]['friend_id'] == session['user_id']: %}
+                                <li>{{ content[i]['first_name']}} wrote: {{ content[i]['content'] }}!
+                                <form action="/delete" method="post">
+                                    <input type="hidden" name="msg_id" value = "{{ content[i]['msg_id'] }}">
+                                    <input type="submit" value="Delete"></li>
+                                </form><br>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="send"> 
+            <h4>You have sent {{length_sent}} messages</h4>
+            <p>
+                <ul>
+                    {% for i in range(friends_length) %}
+                        <li>
+                            <form action="/create_msg" method = 'post'>
+                                {{ friends[i]['first_name'] }}<br>
+                                <input type="hidden" name="friend_id" value="{{ friends[i]['user_id'] }}">
+                                <input type="textarea" name="message">
+                                <input type="submit" value="Send">
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </p>
+
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Counter</title>
+</head>
+<body>
+    <p>Counter</p> 
+    <p>{{ session['times'] }} visits</p>
+    <form action="/clear" method="post">
+        <input type="submit" value="Reset">
+    </form>
+
+    <p>
+    <form action="/addthree" method="post">
+        <input type="submit" value="Add Three Visits!">
+    </form>
+    </p>
+
+    <form action="/increment" method = "post">
+        Put in your increment here: <input type = "text" name = "increment">
+        <input type="submit" value="Increment the Visits!">
+    </form>
+
+    <p>The increment you submitted: {{session['incre']}}</p>
+
+</body>
+</html>

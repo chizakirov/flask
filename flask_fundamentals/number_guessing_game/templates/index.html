@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body{
+            margin: 0 auto;
+            text-align: center;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        .container{
+            padding-top: 30px;
+        }
+        div .box{
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background-color: red;
+            text-align: center;
+            margin-bottom: 50px;
+            border: 2px solid black;
+        }
+
+        div .correct{
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background-color: green;
+            text-align: center;
+            margin-bottom: 50px;
+            border: 2px solid black;
+        }
+
+        .box p{
+            padding-top: 110px;
+            font-size: 30px;
+            color: white;
+        }
+
+        .correct p {
+            padding-top: 30px;
+            font-size: 15px;
+            color: white;
+        }
+        input{
+            border: 2px solid black;
+            box-shadow: 2px 2px black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome to the Great Number Game!</h2>
+        <p>I am thinking of a number between 1 and 100</p>
+        <p>Take a guess!</p>
+        {% if session['message'] == "" %}
+            <form action="/num" method = "post">
+                <p><input type="text" name="guess"></p>
+                <p><input type="submit" value="Submit"></p>     
+            </form>
+        {% endif %}
+
+        {% if session['message'] == "too high" and session['count'] < 5 %}
+            <div class = "box"><p>Too high!</p></div>
+            <form action="/num" method="post">
+                <p><input type="text" name="guess"></p>
+                <p><input type="submit" value="Submit"></p>
+            </form>
+        {% endif %}
+
+        {% if session['message'] == "too low" and session['count'] < 5 %}
+            <div class = "box"><p>Too low!</p></div>
+            <form action="/num" method="post">
+                <p><input type="text" name="guess"></p>
+                <p><input type="submit" value="Submit"></p>
+            </form>
+        {% endif %}
+
+        {% if session['message'] == "correct" %}
+            <div class = "correct">
+                <p>Correct! {{session['computer']}} was the number! <br>
+                You took {{session['count']}} attempts</p>
+                <form action="/reset" method = "post">
+                    <input type="submit" value = "Play again!">
+                </form><br>
+                <form action="/winnerboard" method = "post">
+                    Enter your name: 
+                    <input type="text" name="winnername">
+                    <p><input type="submit" value="Submit"></p>
+                </form>
+            </div>
+        {% endif %}
+
+        {% if session['count'] >= 5 and session['message'] != "correct" %}
+            <div class = "box">
+                <p>You lose! You guessed max 5 attempts</p>
+                <form action="/reset" method = "post">
+                    <input type="submit" value = "Play again!">
+                </form>
+            </div>
+        {% endif %}
+
+        <!-- <p>Computer picked {{session['computer']}}</p> -->
+    </div>
+</body> 
+</html>

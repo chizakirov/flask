@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Private Wall</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body{
+            margin: 0 auto;
+        }
+        div {
+            padding: 10px;
+            border-radius: 5px;
+        }
+        div .register{
+            margin-left: 220px;
+        }
+        .register, .login{
+            background-color: lightskyblue;
+            width: 300px;
+            display:  inline-block;
+            vertical-align: top;
+            margin: 40px;
+        }
+        input[type=text]{
+            width: 280px;
+            border-radius: 5px;
+        }
+        input[type=submit]{
+            width: 80px;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+        }
+    </style>
+    </head>
+  <body>
+    <div class="container">
+        <div class="register">
+            <h3>Registration</h3>
+            <form action="/register" method = 'post'>
+                <p>
+                    First Name<br><input type="text" name="fname">
+                </p>
+                <P>
+                    Last Name<br><input type="text" name="lname">
+                </P>
+                <p>
+                    Email<br><input type="text" name="email">
+                </p>
+                <p>
+                    Password <br><input type="text" name="password">
+                </p>
+                <p>
+                    Confirm PW <br><input type="text" name="pwconfirm">
+                </p>
+                <p><input type="submit" value="Register"></p>
+                
+            </form>
+        </div>
+        <div class="login">
+            {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-danger">{{message}}, {{ session['user'] }}!</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %} 
+            <h3>Login</h3>
+            <form action="/login" method = "post">
+                <p>
+                    Email<br> <input type="text" name="email">
+                </p>
+                <p>
+                    Password <br><input type="text" name="password">
+                </p>
+                <p>
+                    <input type="submit" value="Login">
+                </p>
+                
+            </form>
+        </div>
+    </div>
+  </body>
+</html>

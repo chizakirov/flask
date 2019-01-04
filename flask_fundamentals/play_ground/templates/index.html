@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>play ground</title>
+    <style>
+        div{
+            background-color: {{color}};
+            display: inline-block;
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+    </style>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <p> {{input_here}} </p>
+    <p> {{times}} </p>
+    <p> {{color}}</p>
+
+    {% for x in range(0,times): %}
+        {% if input_here == "play" %}
+            <div></div>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Winner board</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body{
+            margin: 0 auto;
+            text-align: center;
+            font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+        input{
+            border: 2px solid black;
+            box-shadow: 2px 2px black;
+        }
+    </style>
+</head>
+<body>
+    {% if session['message'] == "correct" %}
+        {% if session['winner'] != [] %}
+            <h3>Leaderboard</h3>
+            <p>Here are the winners:</p>
+            {% for i in range(length): %}
+                <p>{{ session['winner'][i]}} took {{session['count']}} attempts </p>
+            {% endfor %}
+        {% endif %}
+        <form action="/reset" method = "post">
+            <input type="submit" value="Back to the game">
+        </form>
+    {% endif %}
+</body>
+</html>

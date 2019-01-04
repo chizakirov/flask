@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>All Artists</h1>
+    {% for one in artists %}
+        <p>Name: {{one['name'] }}</p>
+        <p>Birthdate: {{one["birthday"]}}</p>
+        <p>Deathdate: {{one["deathday"]}}</p>
+    {% endfor %}
+    
+    <h1>Add an Artist</h1>
+    <form action="/create" method="POST">
+        <p>Name: <input type="text" name="name"></p>
+        <p>Birthdate: <input type="date" name="birth"></p>
+        <p>Deathdate: <input type="date" name="death"></p>
+        <input type="submit" value="Add Artist">
+    </form>
+</body>
+</html>
